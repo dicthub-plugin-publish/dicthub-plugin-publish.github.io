@@ -1,10 +1,18 @@
-if (typeof kotlin === 'undefined') {
-  throw new Error("Error loading module 'plugin-com-google-translate'. Its dependency 'kotlin' was not found. Please, check whether 'kotlin' is loaded prior to 'plugin-com-google-translate'.");
-}
-if (typeof this['kotlinx-html-js'] === 'undefined') {
-  throw new Error("Error loading module 'plugin-com-google-translate'. Its dependency 'kotlinx-html-js' was not found. Please, check whether 'kotlinx-html-js' is loaded prior to 'plugin-com-google-translate'.");
-}
-this['plugin-com-google-translate'] = function (_, Kotlin, $module$kotlinx_html_js) {
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd)
+    define(['exports', 'kotlin', 'kotlinx-html-js'], factory);
+  else if (typeof exports === 'object')
+    factory(module.exports, require('kotlin'), require('kotlinx-html-js'));
+  else {
+    if (typeof kotlin === 'undefined') {
+      throw new Error("Error loading module 'plugin-com-google-translate'. Its dependency 'kotlin' was not found. Please, check whether 'kotlin' is loaded prior to 'plugin-com-google-translate'.");
+    }
+    if (typeof this['kotlinx-html-js'] === 'undefined') {
+      throw new Error("Error loading module 'plugin-com-google-translate'. Its dependency 'kotlinx-html-js' was not found. Please, check whether 'kotlinx-html-js' is loaded prior to 'plugin-com-google-translate'.");
+    }
+    root['plugin-com-google-translate'] = factory(typeof this['plugin-com-google-translate'] === 'undefined' ? {} : this['plugin-com-google-translate'], kotlin, this['kotlinx-html-js']);
+  }
+}(this, function (_, Kotlin, $module$kotlinx_html_js) {
   'use strict';
   var Throwable = Error;
   var json = Kotlin.kotlin.js.json_pyyo18$;
@@ -468,6 +476,9 @@ this['plugin-com-google-translate'] = function (_, Kotlin, $module$kotlinx_html_
     return (tmp$ = $receiver[name]) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE();
   }
   function create_plugin_com_google_translate() {
+    return new GoogleTranslationProvider(AjaxHttpClient_getInstance(), new GoogleTranslationParser(), new GoogleTranslationRenderer());
+  }
+  function createPluginInstance() {
     return new GoogleTranslationProvider(AjaxHttpClient_getInstance(), new GoogleTranslationParser(), new GoogleTranslationRenderer());
   }
   function GoogleTranslation(sourceUrl, query, from, to, pron, translation, details) {
@@ -1122,6 +1133,7 @@ this['plugin-com-google-translate'] = function (_, Kotlin, $module$kotlinx_html_
   package$util.TranslationProvider = TranslationProvider;
   package$util.attribute_mxpdhj$ = attribute;
   _.create_plugin_com_google_translate = create_plugin_com_google_translate;
+  _.createPluginInstance = createPluginInstance;
   var package$com_google_translate = package$plugin.com_google_translate || (package$plugin.com_google_translate = {});
   package$com_google_translate.GoogleTranslation = GoogleTranslation;
   package$com_google_translate.Detail = Detail;
@@ -1191,6 +1203,6 @@ this['plugin-com-google-translate'] = function (_, Kotlin, $module$kotlinx_html_
   hash = sM;
   Kotlin.defineModule('plugin-com-google-translate', _);
   return _;
-}(typeof this['plugin-com-google-translate'] === 'undefined' ? {} : this['plugin-com-google-translate'], kotlin, this['kotlinx-html-js']);
+}));
 
 //# sourceMappingURL=plugin-com-google-translate.js.map
